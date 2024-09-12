@@ -1,0 +1,44 @@
+let max3 a b c = 
+  if a > b && a > c then
+    a else if b > c then
+    b else c;;
+
+let min3 a b c =
+  if a < b && a < c then
+    a else if b < c then
+    b else c;;
+
+let middle3 a b c = a + b + c - max3 a b c - min3 a b c;;
+
+let highest_square_sum a b c =
+  let maximum = max3 a b c in
+  let middle = middle3 a b c in
+    maximum * maximum + middle * middle;;
+
+let perfect_square n =
+  int_of_float(sqrt(float_of_int(n))) * int_of_float(sqrt(float_of_int(n))) = n;;
+
+
+
+
+let mystery n =
+  if n >= 1000 || n < 100 then 
+    invalid_arg "n is not a 3 digit number"
+  else
+    (*corps de fonction*)
+  if perfect_square(n) &&
+     let a = n / 100 in
+     let b = n - (a * 100) / 10 in
+     let c = n mod 10 in
+       perfect_square(highest_square_sum a b c) then true
+  else false ;;
+
+
+
+
+
+
+
+
+
+

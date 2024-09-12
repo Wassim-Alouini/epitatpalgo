@@ -1,0 +1,27 @@
+let is_valid_date y m d =
+  if m > 12 || m < 0 || (d > 30 && (m = 4 || m = 6 || m = 9 || m = 11)) || (d > 31 && (m = 1 || m = 3 || m = 5 || m = 7 || m = 8 || m = 10 || m = 12)) || (d > 29 && m = 2) || d < 0 || (y mod 4 = 0 && m = 2 && d > 28) then false else true;;
+
+
+let level1 d m y =
+  if not (is_valid_date y m d) then invalid_arg "invalid date" else
+  if is_valid_date y m (d+1) then (d+1, m, y) else
+  if is_valid_date y (m+1) 1 then (1, (m+1), y) else
+    (1, 1, y+1);;
+
+let read_date_string date =
+  let a = String.sub date 0 2 in
+  let b = String.sub date 3 2 in
+  let c = String.sub date 6 4 in
+    (int_of_string a,int_of_string b,int_of_string c);;
+
+let produce_string_of_date d m y =
+  string_of_int d ^ "/" ^ string_of_int m ^ "/" ^ string_of_int y
+
+let level2 date =
+  let (a, b, c) = read_date_string date in
+  let (d, m, y) = level1 a b c in
+    produce_string_of_date d m y;;
+
+level2 "31/12/2023"
+
+

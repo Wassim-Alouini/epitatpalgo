@@ -1,0 +1,10 @@
+let surface x =
+
+  if x < 0 then invalid_arg "Surface must be positive" else
+
+    let step1 = ((x - 5000) * 1000 + (x - 5000)) in
+    let step2 = step1 / 7 - (7 * step1 mod 7) in
+    let step3 = step2 / 11 - (11 * step2 mod 11) in
+    let step4 = step3 / 13 - (13 * step3 mod 13) in
+      step4 = 555;;
+

@@ -1,0 +1,29 @@
+let extract_abcd n = 
+  let a = n / 1000 in
+  let b = (n mod 1000) / 100 in
+  let c = (n mod 100) / 10 in
+  let d = n mod 10 in
+    (a, b, c, d);;
+
+let all_digits_are_even n =
+  let (a, b, c, d) = extract_abcd(n) in
+    a mod 2 = 0 && b mod 2 = 0 && c mod 2 = 0 && d mod 2 = 0;;
+
+let sum_of_digits n =
+  let (a, b, c, d) = extract_abcd(n) in
+    a + b + c + d;;
+
+let mirror_number n =
+  let (a, b, c, d) = extract_abcd(n) in
+    d * 1000 + c * 100 + b * 10 + a;;
+
+let is_valid_code n =
+  if n < 1000 || n >= 10000 then invalid_arg "n must be 4 digit number" else
+  if all_digits_are_even n &&
+     sum_of_digits n = 8 &&
+     mirror_number n + n = mirror_number(mirror_number n + n) &&
+     n mod 23 = 8 then 
+    true else
+    false;;
+
+is_valid_code 6020;;
